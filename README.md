@@ -50,7 +50,8 @@ The following functions are exposed:
 
 ## Compilation
 
-A simple program is available to test your compilation. It accepts `fia_spp`, `dbh`, `tht`, and optionally `division` on the command line. The `makefile` can compile the test program using the target `test`. A successful compilation following by running `test` should result in:
+A [simple program](./test/test.cpp) is available to test your compilation. It accepts `fia_spp`, `dbh`, `tht`, and optionally `division` on the command line. The `makefile` compiles and optionally executes the test program. A successful compilation following by running `test` should result in:
+
 ```text
 species = 202, division = M240, dbh = 10, height = 60
 Total Volume Inside Bark (cubic feet) = 12.22
@@ -64,8 +65,6 @@ Biomass
         wood    =       327.7
         total   =       478.4
 ```
-
-A dynamic link library can be created using the target `dll`.
 
 ## Notes
 
