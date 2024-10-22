@@ -27,7 +27,7 @@ The following functions are exposed:
 
 * `biomass_components()`: Computes biomass components in pounds given: 
    * FIA numeric species code (`fia_spp`), 
-   * FIA ecological division^[Ecological divisions specifically recognized are: 130  210  220  230  240  260  340  M210 M220 M230 M240 M260 M310 M330] (`division`), 
+   * FIA ecological division^[division] (`division`), 
    * total inside bark volume of tree (top and stump) (`vtotib`), 
    * diameter at breast height (`dbh`) in inches, and 
    * total height (`tht`) in feet.
@@ -75,5 +75,7 @@ A dynamic link library can be created using the target `dll`.
 [^1]: Westfall , James A.; Coulston, John W.; Gray, Andrew N.; Shaw, John D.; Radtke, Philip J.; Walker, David M.; Weiskittel, Aaron R.; MacFarlane, David W.; Affleck, David L.R.; Zhao, Dehai; Temesgen, Hailemariam; Poudel, Krishna P.; Frank, Jereme M.; Prisley, Stephen P.; Wang, Yingfang; Sánchez Meador, Andrew J.; Auty, David; Domke, Grant M. 2024. A national-scale tree volume, biomass, and carbon modeling system for the United States. Gen. Tech. Rep. WO-104. Washington, DC: U.S. Department of Agriculture, Forest Service. 37 p. https://doi.org/10.2737/WO-GTR-104.
 
 [^2]: R Core Team (2024). _R: A Language and Environment for Statistical Computing_. R Foundation for Statistical Computing, Vienna, Austria. <https://www.R-project.org/>
+
+[^division]: Ecological divisions specifically recognized are: 130  210  220  230  240  260  340  M210 M220 M230 M240 M260 M310 M330.
 
 [^3]: Miles, Patrick D.; Smith, W. Brad. 2009. Specific gravity and other properties of wood and bark for 156 tree species found in North America. Res. Note NRS-38. Newtown Square, PA: U.S. Department of Agriculture, Forest Service, Northern Research Station. 35 p. https://doi.org/10.2737/NRS-RN-38.
