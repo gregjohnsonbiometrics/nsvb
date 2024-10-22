@@ -3,7 +3,7 @@ A C++ implementation of National Scale Volume and Biomass estimators (`NSVB`)
 
 ## Introduction
 
-The National Scale Volume and Biomass Estimators (`NSVB`)[^1] were implemented in R[^2] by Virginia Tech. The performance of the code is hampered by the interpretive nature of R. To provide a higher performance API the Virginia Tech code is implemented in C++23.
+The National Scale Volume and Biomass Estimators[^1] (`NSVB`) were implemented in R[^2] by Virginia Tech. The performance of the code is hampered by the interpretive nature of R. To provide a higher performance API the Virginia Tech code is implemented in C++23.
 
 ## Biomass Components Estimated
 
@@ -59,7 +59,7 @@ A dynamic link library can be created using the target `dll`.
 1. The `NSVB` makes a direct estimate of total biomass. A separate estimate of total biomass is computed as a sum of the biomass components of the tree. The component estimates are rebalanced to scale to the direct estimate.
 2. Green tons are estimated using specific gravity and moisture content values from Miles and Smith (2009)[^3].
 
-[1]: Westfall , James A.; Coulston, John W.; Gray, Andrew N.; Shaw, John D.; Radtke, Philip J.; Walker, David M.; Weiskittel, Aaron R.; MacFarlane, David W.; Affleck, David L.R.; Zhao, Dehai; Temesgen, Hailemariam; Poudel, Krishna P.; Frank, Jereme M.; Prisley, Stephen P.; Wang, Yingfang; Sánchez Meador, Andrew J.; Auty, David; Domke, Grant M. 2024. A national-scale tree volume, biomass, and carbon modeling system for the United States. Gen. Tech. Rep. WO-104. Washington, DC: U.S. Department of Agriculture, Forest Service. 37 p. https://doi.org/10.2737/WO-GTR-104.
+[^1]: Westfall , James A.; Coulston, John W.; Gray, Andrew N.; Shaw, John D.; Radtke, Philip J.; Walker, David M.; Weiskittel, Aaron R.; MacFarlane, David W.; Affleck, David L.R.; Zhao, Dehai; Temesgen, Hailemariam; Poudel, Krishna P.; Frank, Jereme M.; Prisley, Stephen P.; Wang, Yingfang; Sánchez Meador, Andrew J.; Auty, David; Domke, Grant M. 2024. A national-scale tree volume, biomass, and carbon modeling system for the United States. Gen. Tech. Rep. WO-104. Washington, DC: U.S. Department of Agriculture, Forest Service. 37 p. https://doi.org/10.2737/WO-GTR-104.
 
 [^2]: R Core Team (2024). _R: A Language and Environment for Statistical Computing_. R Foundation for Statistical Computing, Vienna, Austria. <https://www.R-project.org/>
 
