@@ -14,7 +14,7 @@
 #ifndef CARBON
 #define CARBON
 
-#include "carbon_coef.hpp"
+#include "nsvb_coef.hpp"
 
 // biomass components (lbs)
 struct BIOMASS_COMP {

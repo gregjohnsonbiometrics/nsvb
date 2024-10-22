@@ -19,38 +19,51 @@ Additionally, aboveground biomass (AGB) is computed.
 
 ## Additional Estimators
 
-Functions are included to compute total cubic foot volume inside and outside bark using the `NSCB` system.
+Functions are included to compute total cubic foot volume inside and outside bark using the `NSVB` system.
 
 ## Application Programming Interface
 
 The following functions are exposed:
 
-* `biomass_components`: Computes biomass components in pounds given: 
+* `biomass_components()`: Computes biomass components in pounds given: 
    * FIA numeric species code (`fia_spp`), 
    * FIA ecological division^[Ecological divisions specifically recognized are: 130  210  220  230  240  260  340  M210 M220 M230 M240 M260 M310 M330] (`division`), 
    * total inside bark volume of tree (top and stump) (`vtotib`), 
    * diameter at breast height (`dbh`) in inches, and 
    * total height (`tht`) in feet.
-* `compute_green_tons`: Compute green tons outside bark of a log given:
+* `compute_green_tons()`: Compute green tons outside bark of a log given:
    * `fia_spp`, 
    * total outside bark volume of merchantable stem (cubic feet) (`cfvolob`),
    * total outside bark volume of merchantable stem (cubic feet) (`cfvolib`).
-* `compute_volib`: Computes total cubic volume inside bark (`vtotib`) (cubic feet) given:
+* `compute_volib()`: Computes total cubic volume inside bark (`vtotib`) (cubic feet) given:
    * `fia_spp`,
    * `division`,
    * `dbh`,
    * `tht`.
-* `compute_volob`: Computes total cubic volume outside bark (`vtotob`) (cubic feet) given:
+* `compute_volob()`: Computes total cubic volume outside bark (`vtotob`) (cubic feet) given:
    * `fia_spp`,
    * `division`,
    * `dbh`,
    * `tht`.
 
-`biomass_components` returns a `BIOMASS_COMP` structure defined in `carbon.hpp`. 
+`biomass_components` returns a `BIOMASS_COMP` structure defined in `nsvb.hpp`. 
 
 ## Compilation
 
-A simple program is available to test your compilation. It accepts `fia_spp`, `dbh`, `tht`, and optionally `division` on the command line. The `makefile` can compile the test program using the target `test`.
+A simple program is available to test your compilation. It accepts `fia_spp`, `dbh`, `tht`, and optionally `division` on the command line. The `makefile` can compile the test program using the target `test`. A successful compilation following by running `test` should result in:
+```text
+species = 202, division = M240, dbh = 10, height = 60
+Total Volume Inside Bark (cubic feet) = 12.22
+Total Volume Outside Bark (cubic feet) = 15.83
+Green Lbs = 652.2
+Biomass
+        AGB     =       518.6
+        Bark    =       56.4
+        Branch  =       94.35
+        foliage =       40.21
+        wood    =       327.7
+        total   =       478.4
+```
 
 A dynamic link library can be created using the target `dll`.
 
