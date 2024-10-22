@@ -3,7 +3,7 @@ A C++ implementation of National Scale Volume and Biomass estimators (`NSVB`)
 
 ## Introduction
 
-The National Scale Volume and Biomass Estimators[^1] (`NSVB`) were implemented in R[^2] by Virginia Tech. The performance of the code is hampered by the interpretive nature of R. To provide a higher performance API the Virginia Tech code is implemented in C++23.
+The National Scale Volume and Biomass Estimators (`NSVB`)[^1] were implemented in R[^2] by Virginia Tech. The performance of the code is hampered by the interpretive nature of R. To provide a higher performance API the Virginia Tech code is implemented in C++23.
 
 ## Biomass Components Estimated
 
