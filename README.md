@@ -71,6 +71,14 @@ Biomass
 A R package accessing the NSVB API is located in `./nsvbR` and the most recent Windows Binary and tarballs are in the root directory of this repository. `Rcpp` is required 
 to install and run the package.
 
+The package provides the following R equivalents to the C++ functions:
+
+* biomass_components() 
+* green_tons()
+* volib()
+* volob()
+
+
 ## Notes
 
 1. The `NSVB` makes a direct estimate of total biomass. A separate estimate of total biomass is computed as a sum of the biomass components of the tree. The component estimates are rebalanced to scale to the direct estimate.
