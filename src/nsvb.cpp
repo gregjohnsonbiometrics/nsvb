@@ -92,6 +92,7 @@ double biomass( int fia_spp, const COEFS &coefs, double dbh, double height )
 //   dbh (inches)
 //   height (feet)
 // NOTE: those species defaulting to Jenkins what are woodland species (code 10) return 0.0 pounds
+// 
 BIOMASS_COMP biomass_components( int fia_spp, std::string division, double vtotib, double dbh, double height )
 {
     BIOMASS_COMP bc;

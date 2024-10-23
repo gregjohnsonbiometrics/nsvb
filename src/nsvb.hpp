@@ -11,8 +11,8 @@
 // Greg Johnson Biometrics LLC
 // 10-30-2023
 
-#ifndef CARBON
-#define CARBON
+#ifndef NSVB
+#define NSVB
 
 #include "nsvb_coef.hpp"
 

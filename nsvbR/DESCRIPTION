@@ -1,0 +1,12 @@
+Package: nsvbR
+Type: Package
+Title: National Scale Volume and Biomass estimators (NSVB) R API
+Version: 0.1
+Date: 2024-10-23
+Author: Greg Johnson, Greg Johnson Biometrics LLC
+Maintainer: Greg Johnson <greg@nosnhoj.org>
+Description: Provides access to C++ implementation of the National Scale Volume and Biomass estimators (NSVB).
+License: GPL (>= 2)
+Imports: Rcpp (>= 1.0.12)
+LinkingTo: Rcpp
+RoxygenNote: 7.3.1

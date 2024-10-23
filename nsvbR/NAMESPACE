@@ -1,0 +1,5 @@
+useDynLib(nsvbR, .registration=TRUE)
+importFrom(Rcpp, evalCpp)
+exportPattern("^[[:alpha:]]+")
+
+export(biomass_components)
