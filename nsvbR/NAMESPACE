@@ -3,3 +3,6 @@ importFrom(Rcpp, evalCpp)
 exportPattern("^[[:alpha:]]+")
 
 export(biomass_components)
+export(green_tons)
+export(volib)
+export(volob)

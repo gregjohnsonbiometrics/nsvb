@@ -5,3 +5,15 @@ compute_biomass_components <- function(plot, tree, fia_spp, division, vtotib, db
     .Call(`_nsvbR_compute_biomass_components`, plot, tree, fia_spp, division, vtotib, dbh, height)
 }
 
+compute_green_tons <- function(plot, tree, fia_spp, vtotob, vtotib) {
+    .Call(`_nsvbR_compute_green_tons`, plot, tree, fia_spp, vtotob, vtotib)
+}
+
+compute_volib <- function(plot, tree, fia_spp, division, dbh, height) {
+    .Call(`_nsvbR_compute_volib`, plot, tree, fia_spp, division, dbh, height)
+}
+
+compute_volob <- function(plot, tree, fia_spp, division, dbh, height) {
+    .Call(`_nsvbR_compute_volob`, plot, tree, fia_spp, division, dbh, height)
+}
+

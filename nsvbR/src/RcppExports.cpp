@@ -27,9 +27,59 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// compute_green_tons
+Rcpp::DataFrame compute_green_tons(IntegerVector plot, IntegerVector tree, IntegerVector fia_spp, NumericVector vtotob, NumericVector vtotib);
+RcppExport SEXP _nsvbR_compute_green_tons(SEXP plotSEXP, SEXP treeSEXP, SEXP fia_sppSEXP, SEXP vtotobSEXP, SEXP vtotibSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type plot(plotSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type tree(treeSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type fia_spp(fia_sppSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type vtotob(vtotobSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type vtotib(vtotibSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_green_tons(plot, tree, fia_spp, vtotob, vtotib));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_volib
+Rcpp::DataFrame compute_volib(IntegerVector plot, IntegerVector tree, IntegerVector fia_spp, StringVector division, NumericVector dbh, NumericVector height);
+RcppExport SEXP _nsvbR_compute_volib(SEXP plotSEXP, SEXP treeSEXP, SEXP fia_sppSEXP, SEXP divisionSEXP, SEXP dbhSEXP, SEXP heightSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type plot(plotSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type tree(treeSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type fia_spp(fia_sppSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type division(divisionSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type dbh(dbhSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type height(heightSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_volib(plot, tree, fia_spp, division, dbh, height));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_volob
+Rcpp::DataFrame compute_volob(IntegerVector plot, IntegerVector tree, IntegerVector fia_spp, StringVector division, NumericVector dbh, NumericVector height);
+RcppExport SEXP _nsvbR_compute_volob(SEXP plotSEXP, SEXP treeSEXP, SEXP fia_sppSEXP, SEXP divisionSEXP, SEXP dbhSEXP, SEXP heightSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type plot(plotSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type tree(treeSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type fia_spp(fia_sppSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type division(divisionSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type dbh(dbhSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type height(heightSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_volob(plot, tree, fia_spp, division, dbh, height));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_nsvbR_compute_biomass_components", (DL_FUNC) &_nsvbR_compute_biomass_components, 7},
+    {"_nsvbR_compute_green_tons", (DL_FUNC) &_nsvbR_compute_green_tons, 5},
+    {"_nsvbR_compute_volib", (DL_FUNC) &_nsvbR_compute_volib, 6},
+    {"_nsvbR_compute_volob", (DL_FUNC) &_nsvbR_compute_volob, 6},
     {NULL, NULL, 0}
 };
 
