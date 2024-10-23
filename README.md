@@ -15,7 +15,7 @@ The dry weight in pounds is estimated for the following tree components:
 * Foliage
 * Total
 
-Additionally, aboveground biomass (AGB) is computed.
+Additionally, above ground biomass (AGB) is computed.
 
 ## Additional Estimators
 
@@ -65,6 +65,11 @@ Biomass
         wood    =       327.7
         total   =       478.4
 ```
+
+## R Package
+
+A R package accessing the NSVB API is located in `./nsvbR` and the most recent Windows Binary and tarballs are in the root directory of this repository. `Rcpp` is required 
+to install and run the package.
 
 ## Notes
 
