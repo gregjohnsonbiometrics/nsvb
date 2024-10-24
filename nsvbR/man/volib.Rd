@@ -32,6 +32,6 @@ Compute cubic foot volume inside bark using the National Scale Volume and Biomas
 }
 \examples{
 # compute cubic foot volume inside bark for a Douglas-fir tree with 10 inch dbh and 60 foot height 
-volib( 1, 1, 201, "M240", 10, 60 )
+volib( 1, 1, 202, "M240", 10, 60 )
 
 }

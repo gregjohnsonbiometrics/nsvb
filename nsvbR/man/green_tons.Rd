@@ -32,8 +32,8 @@ Compute green tons using  Miles, et al. 2009.
 }
 \examples{
 # compute green tons for a Douglas-fir tree with 10 inch dbh and 60 foot height 
-v_ib <- volib( 1, 1, 201, "", 10, 60 )
-v_ob <- volob( 1, 1, 201, "", 10, 60 )
-green_tons( 1, 1, 201, v_ob$volob, v_ib$volib )
+v_ib <- volib( 1, 1, 202, "", 10, 60 )
+v_ob <- volob( 1, 1, 202, "", 10, 60 )
+green_tons( 1, 1, 202, v_ob$volob, v_ib$volib )
 
 }

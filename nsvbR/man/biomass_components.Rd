@@ -45,8 +45,8 @@ Compute biomass components in pounds using the National Scale Volume and Biomass
 }
 \examples{
 # compute biomass components for a Douglas-fir tree with 10 inch dbh and 60 foot height in Ecological division M240
-v_ib <- volib( 1, 1, 201, "M240", 10, 60 )
-v_ob <- volob( 1, 1, 201, "M240", 10, 60 )
-biomass_components( 1, 1, 201, "M240", v_ib$volib, 10, 60 )
+v_ib <- volib( 1, 1, 202, "M240", 10, 60 )
+v_ob <- volob( 1, 1, 202, "M240", 10, 60 )
+biomass_components( 1, 1, 202, "M240", v_ib$volib, 10, 60 )
 
 }

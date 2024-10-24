@@ -32,6 +32,6 @@ Compute cubic foot volume outside bark using the National Scale Volume and Bioma
 }
 \examples{
 # compute cubic foot volume outside bark for a Douglas-fir tree with 10 inch dbh and 60 foot height 
-volob( 1, 1, 201, "M240", 10, 60 )
+volob( 1, 1, 202, "M240", 10, 60 )
 
 }

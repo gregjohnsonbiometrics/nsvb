@@ -49,9 +49,9 @@
 #'
 #' @examples
 #' # compute biomass components for a Douglas-fir tree with 10 inch dbh and 60 foot height in Ecological division M240
-#' v_ib <- volib( 1, 1, 201, "M240", 10, 60 )
-#' v_ob <- volob( 1, 1, 201, "M240", 10, 60 )
-#' biomass_components( 1, 1, 201, "M240", v_ib$volib, 10, 60 )
+#' v_ib <- volib( 1, 1, 202, "M240", 10, 60 )
+#' v_ob <- volob( 1, 1, 202, "M240", 10, 60 )
+#' biomass_components( 1, 1, 202, "M240", v_ib$volib, 10, 60 )
 #' 
 #' @export
 
@@ -87,9 +87,9 @@ biomass_components <- function( plot, tree, fia_spp, division, vtotib, dbh, heig
 #'
 #' @examples
 #' # compute green tons for a Douglas-fir tree with 10 inch dbh and 60 foot height 
-#' v_ib <- volib( 1, 1, 201, "", 10, 60 )
-#' v_ob <- volob( 1, 1, 201, "", 10, 60 )
-#' green_tons( 1, 1, 201, v_ob$volob, v_ib$volib )
+#' v_ib <- volib( 1, 1, 202, "", 10, 60 )
+#' v_ob <- volob( 1, 1, 202, "", 10, 60 )
+#' green_tons( 1, 1, 202, v_ob$volob, v_ib$volib )
 #' 
 #' @export
 
@@ -125,7 +125,7 @@ green_tons <- function( plot, tree, fia_spp, vtotob, vtotib )
 #'
 #' @examples
 #' # compute cubic foot volume inside bark for a Douglas-fir tree with 10 inch dbh and 60 foot height 
-#' volib( 1, 1, 201, "M240", 10, 60 )
+#' volib( 1, 1, 202, "M240", 10, 60 )
 #' 
 #' @export
 
@@ -160,7 +160,7 @@ volib <- function( plot, tree, fia_spp, division, dbh, height )
 #'
 #' @examples
 #' # compute cubic foot volume outside bark for a Douglas-fir tree with 10 inch dbh and 60 foot height 
-#' volob( 1, 1, 201, "M240", 10, 60 )
+#' volob( 1, 1, 202, "M240", 10, 60 )
 #' 
 #' @export
 
