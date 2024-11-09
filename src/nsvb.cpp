@@ -95,107 +95,116 @@ double biomass( int fia_spp, const COEFS &coefs, double dbh, double height )
 // 
 BIOMASS_COMP biomass_components( int fia_spp, std::string division, double vtotib, double dbh, double height )
 {
-    BIOMASS_COMP bc;
-    const REFS &r = refs.at( fia_spp );
-    int jspp = r.Jenkins_spcd;
+    try {
+        BIOMASS_COMP bc;
 
-    bc.wood = vtotib * r.wood_sg * 62.4;
+        // use other live tree species code if species not found
+        if( refs.find( fia_spp ) == refs.end() )
+            fia_spp = 999;
 
-    bool found = false;
-    if( division_bark_coefs.find( division ) != division_bark_coefs.end() )
-    {
-        if( division_bark_coefs.at(division).find(fia_spp) != division_bark_coefs.at(division).end() )
+        const REFS &r = refs.at( fia_spp );
+        int jspp = r.Jenkins_spcd;
+
+        bc.wood = vtotib * r.wood_sg * 62.4;
+
+        bool found = false;
+        if( division_bark_coefs.find( division ) != division_bark_coefs.end() )
         {
-            bc.bark = biomass( fia_spp, division_bark_coefs.at(division).at(fia_spp), dbh, height );
-            found = true;
+            if( division_bark_coefs.at(division).find(fia_spp) != division_bark_coefs.at(division).end() )
+            {
+                bc.bark = biomass( fia_spp, division_bark_coefs.at(division).at(fia_spp), dbh, height );
+                found = true;
+            }
         }
-    }
 
-    if( !found )
-    {
-        if( bark_coefs.find(fia_spp) != bark_coefs.end() )
-            bc.bark = biomass( fia_spp, bark_coefs.at(fia_spp), dbh, height );
-        else
-            bc.bark = jspp < 10 ? biomass( jspp, jenkins_bark_coefs.at(jspp), dbh, height ) : 0.0;
-    }
-
-    ///////////////
-
-    found = false;
-    if( division_branch_coefs.find( division ) != division_branch_coefs.end() )
-    {
-        if( division_branch_coefs.at(division).find(fia_spp) != division_branch_coefs.at(division).end() )
+        if( !found )
         {
-            bc.branch = biomass( fia_spp, division_branch_coefs.at(division).at(fia_spp), dbh, height );
-            found = true;
+            if( bark_coefs.find(fia_spp) != bark_coefs.end() )
+                bc.bark = biomass( fia_spp, bark_coefs.at(fia_spp), dbh, height );
+            else
+                bc.bark = jspp < 10 ? biomass( jspp, jenkins_bark_coefs.at(jspp), dbh, height ) : 0.0;
         }
-    }
 
-    if( !found )
-    {
-        if( branch_coefs.find(fia_spp) != branch_coefs.end() )
-            bc.branch = biomass( fia_spp, branch_coefs.at(fia_spp), dbh, height );
-        else
-            bc.branch = jspp < 10 ? biomass( jspp, jenkins_branch_coefs.at(jspp), dbh, height ) : 0.0;
-    }
+        ///////////////
 
-    ///////////////
-    
-    found = false;
-    if( division_foliage_coefs.find( division ) != division_foliage_coefs.end() )
-    {
-        if( division_foliage_coefs.at(division).find(fia_spp) != division_foliage_coefs.at(division).end() )
+        found = false;
+        if( division_branch_coefs.find( division ) != division_branch_coefs.end() )
         {
-            bc.foliage = biomass( fia_spp, division_foliage_coefs.at(division).at(fia_spp), dbh, height );
-            found = true;
+            if( division_branch_coefs.at(division).find(fia_spp) != division_branch_coefs.at(division).end() )
+            {
+                bc.branch = biomass( fia_spp, division_branch_coefs.at(division).at(fia_spp), dbh, height );
+                found = true;
+            }
         }
-    } 
-    
-    if( !found )
-    {
-        if( foliage_coefs.find(fia_spp) != foliage_coefs.end() )
-            bc.foliage = biomass( fia_spp, foliage_coefs.at(fia_spp), dbh, height );
-        else
-            bc.foliage = jspp < 10 ? biomass( jspp, jenkins_foliage_coefs.at(jspp), dbh, height ) : 0.0;
-    }
 
-    ///////////////
-    
-    found = false;
-    if( division_total_coefs.find( division ) != division_total_coefs.end() )
-    {
-        if( division_total_coefs.at(division).find(fia_spp) != division_total_coefs.at(division).end() )
+        if( !found )
         {
-            bc.total = biomass( fia_spp, division_total_coefs.at(division).at(fia_spp), dbh, height );
-            found = true;
-        }    
+            if( branch_coefs.find(fia_spp) != branch_coefs.end() )
+                bc.branch = biomass( fia_spp, branch_coefs.at(fia_spp), dbh, height );
+            else
+                bc.branch = jspp < 10 ? biomass( jspp, jenkins_branch_coefs.at(jspp), dbh, height ) : 0.0;
+        }
+
+        ///////////////
+        
+        found = false;
+        if( division_foliage_coefs.find( division ) != division_foliage_coefs.end() )
+        {
+            if( division_foliage_coefs.at(division).find(fia_spp) != division_foliage_coefs.at(division).end() )
+            {
+                bc.foliage = biomass( fia_spp, division_foliage_coefs.at(division).at(fia_spp), dbh, height );
+                found = true;
+            }
+        } 
+        
+        if( !found )
+        {
+            if( foliage_coefs.find(fia_spp) != foliage_coefs.end() )
+                bc.foliage = biomass( fia_spp, foliage_coefs.at(fia_spp), dbh, height );
+            else
+                bc.foliage = jspp < 10 ? biomass( jspp, jenkins_foliage_coefs.at(jspp), dbh, height ) : 0.0;
+        }
+
+        ///////////////
+        
+        found = false;
+        if( division_total_coefs.find( division ) != division_total_coefs.end() )
+        {
+            if( division_total_coefs.at(division).find(fia_spp) != division_total_coefs.at(division).end() )
+            {
+                bc.total = biomass( fia_spp, division_total_coefs.at(division).at(fia_spp), dbh, height );
+                found = true;
+            }    
+        }
+        
+        if( !found )
+        {
+            if( total_coefs.find(fia_spp) != total_coefs.end() )
+                bc.total = biomass( fia_spp, total_coefs.at(fia_spp), dbh, height );
+            else
+                bc.total = jspp < 10 ? biomass( jspp, jenkins_total_coefs.at(jspp), dbh, height ) : 0.0;
+        }
+
+    //////////////////////////////////////////////
+        double TotalC = bc.wood + bc.bark + bc.branch;
+        double Diff = bc.total - TotalC;
+        double WoodR = bc.wood / TotalC;
+        double BarkR = bc.bark / TotalC;
+        double BranchR = bc.branch / TotalC;
+
+        double WoodAdd = Diff * WoodR;
+        double BarkAdd = Diff * BarkR;
+        double BranchAdd = Diff * BranchR;
+
+        bc.wood += WoodAdd;
+        bc.bark += BarkAdd;
+        bc.branch += BranchAdd;
+        bc.above_ground_biomass = bc.total + bc.foliage;
+
+        return bc;
+    } catch( const std::exception &e ) {
+        throw;
     }
-    
-    if( !found )
-    {
-        if( total_coefs.find(fia_spp) != total_coefs.end() )
-            bc.total = biomass( fia_spp, total_coefs.at(fia_spp), dbh, height );
-        else
-            bc.total = jspp < 10 ? biomass( jspp, jenkins_total_coefs.at(jspp), dbh, height ) : 0.0;
-    }
-
-//////////////////////////////////////////////
-    double TotalC = bc.wood + bc.bark + bc.branch;
-    double Diff = bc.total - TotalC;
-    double WoodR = bc.wood / TotalC;
-    double BarkR = bc.bark / TotalC;
-    double BranchR = bc.branch / TotalC;
-
-    double WoodAdd = Diff * WoodR;
-    double BarkAdd = Diff * BarkR;
-    double BranchAdd = Diff * BranchR;
-
-    bc.wood += WoodAdd;
-    bc.bark += BarkAdd;
-    bc.branch += BranchAdd;
-    bc.above_ground_biomass = bc.total + bc.foliage;
-
-    return bc;
 }
 
 // Compute green tons outside bark of log
@@ -211,12 +220,16 @@ double compute_green_tons( int fia_spp, double cfvolob, double cfvolib )
     double green_tons = -1.0;
 
     try {
+        // use other live tree species code if species not found
+        if( refs.find( fia_spp ) == refs.end() )
+            fia_spp = 999;
+
         const REFS &r = refs.at( fia_spp );
 
         green_tons = (cfvolib * ((r.wood_sg*1000.0) * (1.0 + (r.mc_pct_green_wood/100.0))) * 2.2046 / 35.3145 +
                         (cfvolob-cfvolib) * ((r.bark_sg*1000.0) * (1.0 + (r.mc_pct_green_bark/100.0))) * 2.2046 / 35.3145) / 2000.0;
     } catch( const std::exception &e ) {
-        
+        throw;
     }
 
     return green_tons;
@@ -232,20 +245,29 @@ double compute_green_tons( int fia_spp, double cfvolob, double cfvolib )
 // NOTE: returns 0.0 cubic feet for woodland (juniper) species 58 - 69
 double compute_volib( int fia_spp, std::string division, double dbh, double height )
 {
-    const REFS &r = refs.at( fia_spp );
-    int jspp = r.Jenkins_spcd;
+    try {
+        // use other live tree species code if species not found
+        if( refs.find( fia_spp ) == refs.end() )
+            fia_spp = 999;
 
-    if( division_volib_coefs.find( division ) != division_volib_coefs.end() )
-    {
-        if( division_volib_coefs.at(division).find(fia_spp) != division_volib_coefs.at(division).end() )
-            return biomass( fia_spp, division_volib_coefs.at(division).at(fia_spp), dbh, height );
-    }
+        const REFS &r = refs.at( fia_spp );
     
-    if( volib_coefs.find(fia_spp) != volib_coefs.end() )
-        return biomass( fia_spp, volib_coefs.at(fia_spp), dbh, height );
-    else 
-        return jspp < 10 ? biomass( jspp, jenkins_volib_coefs.at(jspp), dbh, height ) : 0.0;
+        int jspp = r.Jenkins_spcd;
 
+        if( division_volib_coefs.find( division ) != division_volib_coefs.end() )
+        {
+            if( division_volib_coefs.at(division).find(fia_spp) != division_volib_coefs.at(division).end() )
+                return biomass( fia_spp, division_volib_coefs.at(division).at(fia_spp), dbh, height );
+        }
+        
+        if( volib_coefs.find(fia_spp) != volib_coefs.end() )
+            return biomass( fia_spp, volib_coefs.at(fia_spp), dbh, height );
+        else 
+            return jspp < 10 ? biomass( jspp, jenkins_volib_coefs.at(jspp), dbh, height ) : 0.0;
+
+    } catch( const std::exception &e ) {
+        throw;
+    }
 }
 
 
@@ -259,17 +281,25 @@ double compute_volib( int fia_spp, std::string division, double dbh, double heig
 // NOTE: returns 0.0 cubic feet for woodland (juniper) species 58 - 69
 double compute_volob( int fia_spp, std::string division, double dbh, double height )
 {
-    const REFS &r = refs.at( fia_spp );
-    int jspp = r.Jenkins_spcd;
+    try {
+        // use other live tree species code if species not found
+        if( refs.find( fia_spp ) == refs.end() )
+            fia_spp = 999;
+            
+        const REFS &r = refs.at( fia_spp );
+        int jspp = r.Jenkins_spcd;
 
-    if( division_volob_coefs.find( division ) != division_volob_coefs.end() )
-    {
-        if( division_volob_coefs.at(division).find(fia_spp) != division_volob_coefs.at(division).end() )
-            return biomass( fia_spp, division_volob_coefs.at(division).at(fia_spp), dbh, height );
-    }
-    
-    if( volob_coefs.find(fia_spp) != volob_coefs.end() )
-        return biomass( fia_spp, volob_coefs.at(fia_spp), dbh, height );
-    else
-        return jspp < 10 ? biomass( jspp, jenkins_volob_coefs.at(jspp), dbh, height ) : 0.0;
+        if( division_volob_coefs.find( division ) != division_volob_coefs.end() )
+        {
+            if( division_volob_coefs.at(division).find(fia_spp) != division_volob_coefs.at(division).end() )
+                return biomass( fia_spp, division_volob_coefs.at(division).at(fia_spp), dbh, height );
+        }
+        
+        if( volob_coefs.find(fia_spp) != volob_coefs.end() )
+            return biomass( fia_spp, volob_coefs.at(fia_spp), dbh, height );
+        else
+            return jspp < 10 ? biomass( jspp, jenkins_volob_coefs.at(jspp), dbh, height ) : 0.0;
+    } catch( const std::exception &e ) {
+        throw;
+    }        
 }

@@ -48,6 +48,8 @@ The following functions are exposed:
 
 `biomass_components` returns a `BIOMASS_COMP` structure defined in `nsvb.hpp`. 
 
+If an `fia_spp` is not found, the system uses `999` (other or unknown live tree).
+
 ## Compilation
 
 A [simple program](./test/test.cpp) is available to test your compilation. It accepts `fia_spp`, `dbh`, `tht`, and optionally `division` on the command line. The `makefile` compiles and optionally executes the test program. A successful compilation following by running `test` should result in:
