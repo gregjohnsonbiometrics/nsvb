@@ -25,6 +25,12 @@ double equation3( double dbh, double total_height, const COEFS &coefs )
     return x;
 }
 
+double equation31( double dbh, double total_height, double wood_sg, const COEFS &coefs ) 
+{ 
+    double x = coefs.a * std::pow(dbh,coefs.b) * std::pow(total_height,coefs.c) * wood_sg; 
+    return x;
+}
+
 double equation4( double dbh, double total_height, double k, const COEFS &coefs ) 
 { 
     double x = dbh < k ? coefs.a0 * std::pow(dbh,coefs.b0) * std::pow(total_height,coefs.c) : 
@@ -56,9 +62,10 @@ double equation50( double dbh, double total_height, const COEFS &coefs )
 // compute a biomass component (pounds)
 //   FIA species code
 //   Coefficients
+//   Wood specific gravity
 //   dbh (inches)
 //   height (feet)
-double biomass( int fia_spp, const COEFS &coefs, double dbh, double height )
+double biomass( int fia_spp, const COEFS &coefs, double wood_sg, double dbh, double height )
 {
     double biomass = 0.0;
 
@@ -66,6 +73,9 @@ double biomass( int fia_spp, const COEFS &coefs, double dbh, double height )
         switch( coefs.equation ) {
             case 3:
                 biomass = equation3( dbh, height, coefs );
+                break;
+            case 31:
+                biomass = equation31( dbh, height, wood_sg, coefs );
                 break;
             case 4: {
                 // k=9 for softwood trees and k=11 for hardwoods
@@ -112,7 +122,7 @@ BIOMASS_COMP biomass_components( int fia_spp, std::string division, double vtoti
         {
             if( division_bark_coefs.at(division).find(fia_spp) != division_bark_coefs.at(division).end() )
             {
-                bc.bark = biomass( fia_spp, division_bark_coefs.at(division).at(fia_spp), dbh, height );
+                bc.bark = biomass( fia_spp, division_bark_coefs.at(division).at(fia_spp), r.wood_sg, dbh, height );
                 found = true;
             }
         }
@@ -120,9 +130,9 @@ BIOMASS_COMP biomass_components( int fia_spp, std::string division, double vtoti
         if( !found )
         {
             if( bark_coefs.find(fia_spp) != bark_coefs.end() )
-                bc.bark = biomass( fia_spp, bark_coefs.at(fia_spp), dbh, height );
-            else
-                bc.bark = jspp < 10 ? biomass( jspp, jenkins_bark_coefs.at(jspp), dbh, height ) : 0.0;
+                bc.bark = biomass( fia_spp, bark_coefs.at(fia_spp), r.wood_sg, dbh, height );
+            else 
+                bc.bark = jspp < 10 ? biomass( jspp, jenkins_bark_coefs.at(jspp), r.wood_sg, dbh, height ) : 0.0;
         }
 
         ///////////////
@@ -132,7 +142,7 @@ BIOMASS_COMP biomass_components( int fia_spp, std::string division, double vtoti
         {
             if( division_branch_coefs.at(division).find(fia_spp) != division_branch_coefs.at(division).end() )
             {
-                bc.branch = biomass( fia_spp, division_branch_coefs.at(division).at(fia_spp), dbh, height );
+                bc.branch = biomass( fia_spp, division_branch_coefs.at(division).at(fia_spp), r.wood_sg, dbh, height );
                 found = true;
             }
         }
@@ -140,9 +150,9 @@ BIOMASS_COMP biomass_components( int fia_spp, std::string division, double vtoti
         if( !found )
         {
             if( branch_coefs.find(fia_spp) != branch_coefs.end() )
-                bc.branch = biomass( fia_spp, branch_coefs.at(fia_spp), dbh, height );
-            else
-                bc.branch = jspp < 10 ? biomass( jspp, jenkins_branch_coefs.at(jspp), dbh, height ) : 0.0;
+                bc.branch = biomass( fia_spp, branch_coefs.at(fia_spp), r.wood_sg, dbh, height );
+            else 
+                bc.branch = jspp < 10 ? biomass( jspp, jenkins_branch_coefs.at(jspp), r.wood_sg, dbh, height ) : 0.0;
         }
 
         ///////////////
@@ -152,7 +162,7 @@ BIOMASS_COMP biomass_components( int fia_spp, std::string division, double vtoti
         {
             if( division_foliage_coefs.at(division).find(fia_spp) != division_foliage_coefs.at(division).end() )
             {
-                bc.foliage = biomass( fia_spp, division_foliage_coefs.at(division).at(fia_spp), dbh, height );
+                bc.foliage = biomass( fia_spp, division_foliage_coefs.at(division).at(fia_spp), r.wood_sg, dbh, height );
                 found = true;
             }
         } 
@@ -160,9 +170,9 @@ BIOMASS_COMP biomass_components( int fia_spp, std::string division, double vtoti
         if( !found )
         {
             if( foliage_coefs.find(fia_spp) != foliage_coefs.end() )
-                bc.foliage = biomass( fia_spp, foliage_coefs.at(fia_spp), dbh, height );
+                bc.foliage = biomass( fia_spp, foliage_coefs.at(fia_spp), r.wood_sg, dbh, height );
             else
-                bc.foliage = jspp < 10 ? biomass( jspp, jenkins_foliage_coefs.at(jspp), dbh, height ) : 0.0;
+                bc.foliage = jspp < 10 ? biomass( jspp, jenkins_foliage_coefs.at(jspp), r.wood_sg, dbh, height ) : 0.0;
         }
 
         ///////////////
@@ -172,7 +182,7 @@ BIOMASS_COMP biomass_components( int fia_spp, std::string division, double vtoti
         {
             if( division_total_coefs.at(division).find(fia_spp) != division_total_coefs.at(division).end() )
             {
-                bc.total = biomass( fia_spp, division_total_coefs.at(division).at(fia_spp), dbh, height );
+                bc.total = biomass( fia_spp, division_total_coefs.at(division).at(fia_spp), r.wood_sg, dbh, height );
                 found = true;
             }    
         }
@@ -180,13 +190,16 @@ BIOMASS_COMP biomass_components( int fia_spp, std::string division, double vtoti
         if( !found )
         {
             if( total_coefs.find(fia_spp) != total_coefs.end() )
-                bc.total = biomass( fia_spp, total_coefs.at(fia_spp), dbh, height );
-            else
-                bc.total = jspp < 10 ? biomass( jspp, jenkins_total_coefs.at(jspp), dbh, height ) : 0.0;
+                bc.total = biomass( fia_spp, total_coefs.at(fia_spp), r.wood_sg, dbh, height );
+            else {
+                bc.total = jspp < 10 ? biomass( jspp, jenkins_total_coefs.at(jspp), r.wood_sg, dbh, height ) : 0.0;
+                std::cout << "used jenkins total: " << bc.total << "\n";
+            }
         }
 
-    //////////////////////////////////////////////
+        //////////////////////////////////////////////
         double TotalC = bc.wood + bc.bark + bc.branch;
+        
         double Diff = bc.total - TotalC;
         double WoodR = bc.wood / TotalC;
         double BarkR = bc.bark / TotalC;
@@ -199,6 +212,7 @@ BIOMASS_COMP biomass_components( int fia_spp, std::string division, double vtoti
         bc.wood += WoodAdd;
         bc.bark += BarkAdd;
         bc.branch += BranchAdd;
+
         bc.above_ground_biomass = bc.total + bc.foliage;
 
         return bc;
@@ -257,13 +271,13 @@ double compute_volib( int fia_spp, std::string division, double dbh, double heig
         if( division_volib_coefs.find( division ) != division_volib_coefs.end() )
         {
             if( division_volib_coefs.at(division).find(fia_spp) != division_volib_coefs.at(division).end() )
-                return biomass( fia_spp, division_volib_coefs.at(division).at(fia_spp), dbh, height );
+                return biomass( fia_spp, division_volib_coefs.at(division).at(fia_spp), r.wood_sg, dbh, height );
         }
         
         if( volib_coefs.find(fia_spp) != volib_coefs.end() )
-            return biomass( fia_spp, volib_coefs.at(fia_spp), dbh, height );
+            return biomass( fia_spp, volib_coefs.at(fia_spp), r.wood_sg, dbh, height );
         else 
-            return jspp < 10 ? biomass( jspp, jenkins_volib_coefs.at(jspp), dbh, height ) : 0.0;
+            return jspp < 10 ? biomass( jspp, jenkins_volib_coefs.at(jspp), r.wood_sg, dbh, height ) : 0.0;
 
     } catch( const std::exception &e ) {
         throw;
@@ -292,13 +306,13 @@ double compute_volob( int fia_spp, std::string division, double dbh, double heig
         if( division_volob_coefs.find( division ) != division_volob_coefs.end() )
         {
             if( division_volob_coefs.at(division).find(fia_spp) != division_volob_coefs.at(division).end() )
-                return biomass( fia_spp, division_volob_coefs.at(division).at(fia_spp), dbh, height );
+                return biomass( fia_spp, division_volob_coefs.at(division).at(fia_spp), r.wood_sg, dbh, height );
         }
         
         if( volob_coefs.find(fia_spp) != volob_coefs.end() )
-            return biomass( fia_spp, volob_coefs.at(fia_spp), dbh, height );
+            return biomass( fia_spp, volob_coefs.at(fia_spp), r.wood_sg, dbh, height );
         else
-            return jspp < 10 ? biomass( jspp, jenkins_volob_coefs.at(jspp), dbh, height ) : 0.0;
+            return jspp < 10 ? biomass( jspp, jenkins_volob_coefs.at(jspp), r.wood_sg, dbh, height ) : 0.0;
     } catch( const std::exception &e ) {
         throw;
     }        

@@ -29,9 +29,10 @@ struct BIOMASS_COMP {
 // compute a biomass component (pounds)
 //  FIA species code
 //  Coefficients
+//  Wood specific gravity
 //  dbh (inches)
 //  height (feet)
-double biomass( int fia_spp, const COEFS &coefs, double dbh, double height );
+double biomass( int fia_spp, const COEFS &coefs, double wood_sg, double dbh, double height );
 
 // compute biomass components in pounds given:
 //  FIA species code
