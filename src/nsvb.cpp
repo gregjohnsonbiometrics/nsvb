@@ -193,7 +193,6 @@ BIOMASS_COMP biomass_components( int fia_spp, std::string division, double vtoti
                 bc.total = biomass( fia_spp, total_coefs.at(fia_spp), r.wood_sg, dbh, height );
             else {
                 bc.total = jspp < 10 ? biomass( jspp, jenkins_total_coefs.at(jspp), r.wood_sg, dbh, height ) : 0.0;
-                std::cout << "used jenkins total: " << bc.total << "\n";
             }
         }
 
